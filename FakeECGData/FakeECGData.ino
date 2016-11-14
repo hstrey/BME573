@@ -1,4 +1,3 @@
-#include <Wire.h>
 #include <SimbleeBLE.h>
 
 unsigned int data;
@@ -260,7 +259,6 @@ void setup() {
 int j = 0;
 
 void loop() {
-  Simblee_ULPDelay(10);
   if(j < ArrayLength){
     data = ECG[j];
     j++;
@@ -276,11 +274,12 @@ void loop() {
   }
   BufferPointer += 2;
   pointer += 2;
-
   if(pointer >= 20){
      SimbleeBLE.send((const char*)&Buffer[0],20);
+     Simblee_ULPDelay(50);
      BufferPointer = &Buffer[0];
      pointer = 0;
   }
   }
+
 
